@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+	
+	
+<body id="page-top">
+
+	<div layout:fragment="content">
+
+		<div id="wrapper">
+			<div class="container-fluid">
+				<div
+					class="d-sm-flex align-items-center justify-content-between mb-4">
+					<h1 class="h3 mb-0 text-gray-800">Cadastro de Funcionários</h1>
+					<a th:href="@{/funcionario/listar}"				   
+						class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+						class="fas fa-print fa-sm text-white-50"></i> Gerar Listagem</a>
+												
+				</div>				
+				<div class="alert alert-success" role="alert"  th:if="${msg != null}">
+					<button type="button" class="close" data-dismiss="alert" id="success-alert"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<span th:text="${msg}"></span>
+					
+				</div>
+				
+				<form method="post" th:object="${funcionario}"
+					th:action="@{/funcionario/salvar}">
+					<div class="row">
+						<div class="col-md-4 col-xs-2">
+							<div class="form-group">
+								<input type="hidden"
+									class="form-control" id="id" name="id" th:field="*{id}">
+								<label for="nome">Nome</label> <input type="text"
+									class="form-control" id="nome" name="nome" th:field="*{nome}"
+									required>
+							</div>
+						</div>
+
+						<div class="col-md-4 col-xs-2">
+							<div class="form-group">
+								<label for="email">E-mail</label> <input type="email"
+									th:field="*{email}" class="form-control" id="email"
+									name="email" required>
+							</div>
+							<div class="alert alert-danger" th:if="${#fields.hasErrors('email')}">
+								<span th:errors="*{email}"></span>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-3 col-xs-4">
+							<div class="form-group">
+								<label for="senha">Senha</label> <input type="text"
+									th:field="*{senha}" class="form-control" id="senha"
+									name="senha" required>
+							</div>
+						</div>
+
+						<div class="col-md-3 col-xs-4">
+							<div class="form-group">
+								<label for="unidade">Perfil</label><br> <select
+									class="custom-select" id="perfil" th:field="*{perfil}">
+									<option th:each=" perfil : ${perfis}" th:value="${perfil}" th:selected="${perfil == perfil}"
+										th:text="${perfil}"></option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<button type="submit" class="btn btn-primary">Salvar</button>
+				</form>
+
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

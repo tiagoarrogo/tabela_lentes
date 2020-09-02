@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+
+
+<body id="page-top">
+
+	<div layout:fragment="content">
+
+		<!-- Page Wrapper -->
+		<div id="wrapper">
+			<!-- Main Content -->
+
+			<div class="container-fluid">
+				<div
+					class="d-sm-flex align-items-center justify-content-between mb-4">
+					<h1 class="h3 mb-0 text-gray-800">Cadastro de Produtos</h1>
+					<a th:href="@{/produto/listar}"
+						class=" d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+						class="fas fa-print fa-sm text-white-50"></i>Tabela de Produtos</a>
+				</div>
+				<div class="alert alert-success" role="alert"  th:if="${msg != null}">
+					<button type="button" class="close" data-dismiss="alert" id="success-alert"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<span th:text="${msg}"></span>
+					
+				</div>
+				<form method="post" th:object="${produto}"
+					th:action="@{/produto/salvar}">
+					<div class="form-group">
+						<input type="hidden" class="form-control" id="id" name="id"
+							th:field="*{id}">
+					</div>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-2 col-xs-3">
+								<label for="codigoErp">Código(Sistema Ótico)</label> <input
+									type="text" class="form-control" id="codigoErp"
+									name="codigoErp" th:field="*{codigoSistemaErp}">
+							</div>
+							<div class="col-md-4 col-xs-3">
+								<div class="form-group">
+									<label for="codigoLab">Descrição do Produto</label> <input
+										type="text" class="form-control" id="" name="descricao"
+										th:field="*{descricao}" required>
+								</div>
+							</div>
+							<div class="col-md-2 col-xs-3">
+								<div class="form-group">
+									<label for="unidade">Unidade</label><br> <select
+										class="custom-select" id="unidade" th:field="*{un}" required>
+										<option selected value="">Selecione</option>
+										<option value="PR">PR</option>
+										<option value="PC">PC</option>
+										<option value="UN">UN</option>
+									</select>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+
+							<div class="col-md-2 col-xs-4">
+								<div class="form-group">
+									<label for="tipoProduto">Tipo de Produto</label><br> <select
+										class="custom-select" id="tipoProduto" required
+										th:field="*{produtoTipo}" data-live-search="true">
+										<option selected value="">Selecione</option>
+										<option th:each=" produtoTipo : ${produtosTipo}"
+											th:value="${produtoTipo.id}"
+											th:selected="${produtoTipo == produtoTipo}"
+											th:text="${produtoTipo.descricao}"></option>
+									</select>
+								</div>
+							</div>
+
+							<div class="col-md-3 col-xs-4">
+								<div class="form-group">
+									<label for="marca">Marca</label><br> <select
+										class="custom-select" id="produtoMarca" required
+										th:field="*{produtoMarca}">
+										<option selected value="">Selecione</option>
+										<option th:each=" produtoMarca : ${produtosMarca}"
+											th:value="${produtoMarca.id}"
+											th:selected="${produtoMarca == produtoMarca}"
+											th:text="${produtoMarca.descricao}"></option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-2 col-xs-4">
+								<div class="form-group">
+									<label for="material">Material</label><br> <select
+										class="custom-select" id="produtoMaterial"
+										th:field="*{produtoMaterial}">
+										<option selected value="">Selecione</option>
+										<option th:each=" produtoMaterial : ${produtosMaterial}"
+											th:value="${produtoMaterial.id}"
+											th:selected="${produtoMaterial == produtoMaterial}"
+											th:text="${produtoMaterial.descricao}"></option>
+									</select>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-2 col-xs-4">
+								<div class="form-group">
+									<label for="precoCusto">Preço Custo</label> <input
+										class="form-control" id="precoCusto" name="precoCusto"
+										th:field="*{precoCusto}"
+										onkeypress="$(this).mask('###0.00', {reverse: true});">
+								</div>
+							</div>
+							<div class="col-md-2 col-xs-4">
+								<div class="form-group">
+									<label for="precoVenda">Preço Venda</label> <input
+										class="form-control" id="precoVenda" name="precoVenda"
+										th:field="*{precoVenda}" required
+										onkeypress="$(this).mask('###0.00', {reverse: true});">
+								</div>
+							</div>
+							<div class="col-md-3 col-xs-4">
+								<div class="form-group">
+									<label for="fornecedor">Fornecedor</label><br> <select
+										class="custom-select" id="fornecedor" required
+										th:field="*{fornecedor}">
+										<option selected value="">Selecione</option>
+										<option th:each=" fornecedor : ${fornecedores}"
+											th:value="${fornecedor.id}"
+											th:selected="${fornecedor == fornecedor}"
+											th:text="${fornecedor.nome}"></option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<button type="submit" class="btn btn-primary">Salvar</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

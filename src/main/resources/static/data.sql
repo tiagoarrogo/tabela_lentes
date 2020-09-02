@@ -1,0 +1,1 @@
+INSERT INTO funcionario VALUES (1,'tiagoarrogo@gmail.com','Tiago Gonçalves Arrogo','{bcrypt}$2a$10$u6LQ3WQ1yaq44iJWvgC0leEW01F37HT0xnBA1aHau4A9VlKDyQ1se','ADMIN');

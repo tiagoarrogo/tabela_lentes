@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}"
+	th:with="link=@{/cliente/home}">
+
+<body>
+	<div layout:fragment="content">
+		<div id="wrapper">
+			<div class="container-fluid">
+				<div class="text-center">
+					<div class="error mx-auto">404</div>
+					<p class="lead text-red-800 mb-5.">Página não encontrada!</p>					
+					<a th:href="@{/home}">&larr; Voltar</a>
+				</div>
+			</div>
+		</div>
+	</div>	
+</body>
+</html>

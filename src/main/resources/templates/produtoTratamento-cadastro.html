@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+
+
+<body id="page-top">
+
+	<div layout:fragment="content">
+
+		<div id="wrapper">
+			<div class="container-fluid">
+				<div
+					class="d-sm-flex align-items-center justify-content-between mb-4">
+					<h1 class="h3 mb-0 text-gray-800">Cadastro de tratamento de produto</h1>
+					<a th:href="@{/produtoTratamento/listar}"
+						class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+						class="fas fa-print fa-sm text-white-50"></i> Gerar Listagem</a>
+
+				</div>
+				<div class="alert alert-success" role="alert" th:if="${msg != null}">
+					<button type="button" class="close" data-dismiss="alert"
+						id="success-alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<span th:text="${msg}"></span>
+
+				</div>
+
+				<form method="post" th:object="${produtoTratamento}" th:action="@{/produtoTratamento/salvar}">
+					<div class="form-group">
+						<input type="hidden" class="form-control" id="id" name="id" th:field="*{id}">
+					</div>
+					<div class="row">
+						<div class="col-md-5 col-xs-4">
+							<div class="form-group">
+								<label for="servico">Descrição</label> <input type="text"
+									class="form-control" id="descricao" name="descricao" required th:field="*{descricao}">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-10 col-xs-4">
+							<div class="form-group">
+								<label for="especificacao">Especificação Técnica</label>
+								<textarea class="form-control" id="especificacao" th:field="*{especificacaoTecnica}"
+									name="especificacao"></textarea>
+							</div>
+							<div class="row">
+								<div class="col-md-3 col-xs-4">
+									<div class="form-group">
+										<label for="precoVenda">Preço Venda</label> <input type="text"
+											class="form-control" id="precoVenda" name="precoVenda"
+											onkeypress="$(this).mask('###0.00', {reverse: true});" required th:field="*{precoVenda}">
+									</div>
+									<div class="alert alert-danger" th:if="${#fields.hasErrors('precoVenda')}">
+								<span th:errors="*{precoVenda}"></span>
+							</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<button type="submit" class="btn btn-primary">Salvar</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+
+
+<body id="page-top">
+
+	<div layout:fragment="content">
+
+		<div id="wrapper">
+			<div class="container-fluid">
+				<div
+					class="d-sm-flex align-items-center justify-content-between mb-4">
+					<h1 class="h3 mb-0 text-gray-800">Tabela de produtos</h1>
+				</div>
+				<div class="alert alert-success" role="alert" th:if="${msg != null}">
+					<button type="button" class="close" data-dismiss="alert"
+						id="success-alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<span th:text="${msg}"></span>
+
+				</div>
+
+				<div class="card shadow mb-3">
+					<div class="card-header py-3"></div>
+					<div class="card-body">
+						<div class="table-responsive">
+							<table class="table table-bordered" id="dataTable" width="100%"
+								cellspacing="0">
+								<thead>
+									<tr>
+										<th>Código ERP</th>
+										<th>Descrição</th>	
+										<th>UN</th>	
+										<th>Tipo Produto</th>
+										<th>Marca</th>
+										<th>Material</th>			
+										<th>Preço Custo</th>
+										<th>Preço Venda</th>
+										<th>Fornecedor</th>												
+										<th>
+											<div class="text-center">
+												<label>Alterar</label>
+											</div>
+										</th>
+										<th>
+											<div class="text-center">
+												<label>Excluir</label>
+											</div>
+										</th>
+										<th>
+											<div class="text-center">
+												<label>Sugestões</label>
+											</div>
+										</th>
+									</tr>
+								</thead>
+								
+								<tbody>
+									<tr th:each="produto : ${produtos}">
+										<td th:text="${produto.codigoSistemaErp}"></td>
+										<td th:text="${produto.descricao}"></td>	
+										<td th:text="${produto.un}"></td>
+										<td th:text="${produto.produtoTipo.descricao}"></td>	
+										<td th:text="${produto.produtoMarca.descricao}"></td>	
+										<td th:text="${produto.produtoMaterial.descricao}"></td>
+										<td th:text="${produto.precoCusto}"></td>	
+										<td th:text="${produto.precoVenda}"></td>	
+										<td th:text="${produto.fornecedor.nome}"></td>		
+										<td>
+											<div class="text-center">
+												<button type="button" class="far fa-edit"
+													style="color: dodgerblue;"
+													th:onclick="'location.href=\'' + @{/produto/editar} + '?idProduto=' + ${produto.id} + '\';'"></button>
+											</div>
+										</td>
+										<td>
+											<div class="text-center">
+
+												<button type="button" class="far fa-trash-alt"
+													style="color: red;"
+													th:onclick="'location.href=\'' + @{/produto/deletar} + '?idProduto=' + ${produto.id} + '\';'"></button>
+											</div>
+										</td>
+										<td>
+											<div class="text-center">
+
+												<button type="button" class="fas fa-bars"
+													style="color: red;"
+													th:onclick="'location.href=\'' + @{/produtoSugestaoTratamento/cadastro} + '?idProduto=' + ${produto.id} + '\';'"></button>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

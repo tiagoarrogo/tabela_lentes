@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+
+
+<body id="page-top">
+
+	<div layout:fragment="content">
+
+		<!-- Page Wrapper -->
+		<div id="wrapper">
+			<!-- Main Content -->
+
+			<div class="container-fluid">
+				<div
+					class="d-sm-flex align-items-center justify-content-between mb-4">
+					<h1 class="h3 mb-0 text-gray-800">Cadastro de sugestão de
+						Tratamento</h1>
+					<a th:href="@{/produtoSugestaoTratamento/listar}"
+						class=" d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+						class="fas fa-print fa-sm text-white-50"></i>Tabela de sugestões</a>
+				</div>
+				<div class="alert alert-success" role="alert" th:if="${msg != null}">
+					<button type="button" class="close" data-dismiss="alert"
+						id="success-alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<span th:text="${msg}"></span>
+
+				</div>
+				<form method="post" th:object="${produtoSugestaoTratamento}"
+					th:action="@{/produtoSugestaoTratamento/salvar}">
+					<div class="form-group">
+						<input type="hidden" class="form-control" id="id" name="id"
+							th:field="*{produto.id}">
+					</div>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-2 col-xs-3">
+								<label for="codigoErp">Código (Sistema Ótico)</label> <input
+									type="text" class="form-control" id="codigoErp" disabled
+									name="codigoErp" th:field="*{produto.codigoSistemaErp}">
+							</div>
+							<div class="col-md-4 col-xs-3">
+								<div class="form-group">
+									<label for="codigoLab">Descrição do Produto</label> <input
+										type="text" class="form-control" id="" name="descricao" disabled
+										th:field="*{produto.descricao}" required>
+								</div>
+							</div>
+
+						</div>
+						<div class="row">
+
+							<div class="col-md-3 col-xs-4">
+								<div class="form-group">
+									<label for="tratamento">Tratamento</label><br> <select
+										class="custom-select" id="tratamento" required
+										th:field="*{produtoTratamento.id}">
+										<option th:each=" produtoTratamento : ${produtosTratamento}"
+											th:value="${produtoTratamento.id}"
+											th:selected="${produtoTratamento == produtoTratamento}"
+											th:text="${produtoTratamento.descricao}"></option>
+									</select>
+								</div>
+								<div class="alert alert-danger" th:if="${#fields.hasErrors('produtoTratamento.id')}">
+								<span th:errors="*{tratamento}"></span>
+							</div>
+							</div>
+
+
+						</div>
+
+					</div>
+					<button type="submit" class="btn btn-primary">Salvar</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
